@@ -1,0 +1,27 @@
+meta-aura
+=========
+
+This layer simply provides support for building pianobar, a console-based
+pandora client.
+
+
+
+Dependencies
+------------
+
+Poky
+  URI: git://git.yoctoproject.org/poky.git
+  branch: denzil
+  revision: HEAD
+
+
+
+License
+-------
+
+All metadata is MIT licensed unless otherwise stated. Source code included
+in tree for individual recipes is under the LICENSE stated in each recipe
+(.bb file) unless otherwise stated.
+
+This README document is Copyright (C) 2012 Intel Corporation.
+
