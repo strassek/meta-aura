@@ -6,15 +6,13 @@ SECTION = "libs/multimedia"
 DEPENDS = ""
 DEPENDS += " ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-lib", "",d)}"
 DEPENDS += " ${@base_contains("MACHINE_FEATURES", "pulseaudio", "pulseaudio", "",d)}"
-PROVIDES = "${@base_contains("MACHINE_FEATURES", "alsa", "libao-alsa libao-alsa-plugin", "",d)}"
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "http://downloads.xiph.org/releases/ao/libao-${PV}.tar.gz"
 
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "\
-  --enable-oss \
   --disable-esd \
   --disable-esdtest \
   --disable-alsa \
@@ -24,6 +22,7 @@ EXTRA_OECONF = "\
 
 EXTRA_OECONF += " ${@base_contains("MACHINE_FEATURES", "alsa", "--enable-alsa09", "--disable-alsa09",d)}"
 EXTRA_OECONF += " ${@base_contains("MACHINE_FEATURES", "pulseaudio", "--enable-pulse", "--disable-pulse",d)}"
+EXTRA_OECONF += " ${@base_contains("MACHINE_FEATURES", "oss", "--enable-oss", "--disable-oss",d)}"
 
 
 PACKAGES =+ "${PN}-alsa ${PN}-alsa-dev ${PN}-pulse ${PN}-pulse-dev ${PN}-oss ${PN}-oss-dev"
