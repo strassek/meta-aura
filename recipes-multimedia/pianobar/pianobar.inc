@@ -4,8 +4,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7f7d65c519eee701c4884152c5d9fddc"
 
 DEPENDS = "libao gnutls libgcrypt libjson faad2"
+RDEPENDS += " ${@base_contains("MACHINE_FEATURES", "alsa", "libao-alsa", "",d)}"
+RDEPENDS += " ${@base_contains("MACHINE_FEATURES", "pulseaudio", "libao-pulse", "",d)}"
+RDEPENDS += " ${@base_contains("MACHINE_FEATURES", "oss", "libao-oss", "",d)}"
 
-INC_PR = "r0"
+INC_PR = "r2"
 
 SRC_URI = "git://github.com/PromyLOPh/pianobar;protocol=git"
 
