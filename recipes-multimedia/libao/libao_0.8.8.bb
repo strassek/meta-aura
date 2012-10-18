@@ -3,9 +3,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 HOMEPAGE = "http://www.xiph.org/ao/"
 SECTION = "libs/multimedia"
-DEPENDS = "alsa-lib pulseaudio"
-PROVIDES = "libao-alsa libao-alsa-plugin"
-PR = "r1"
+DEPENDS = ""
+DEPENDS += " ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-lib", "",d)}"
+DEPENDS += " ${@base_contains("MACHINE_FEATURES", "pulseaudio", "pulseaudio", "",d)}"
+PROVIDES = "${@base_contains("MACHINE_FEATURES", "alsa", "libao-alsa libao-alsa-plugin", "",d)}"
+PR = "r2"
 
 SRC_URI = "http://downloads.xiph.org/releases/ao/libao-${PV}.tar.gz"
 
@@ -16,11 +18,13 @@ EXTRA_OECONF = "\
   --disable-esd \
   --disable-esdtest \
   --disable-alsa \
-  --enable-alsa09 \
   --disable-arts \
   --disable-nas \
-  --enable-pulse \
 "
+
+EXTRA_OECONF += " ${@base_contains("MACHINE_FEATURES", "alsa", "--enable-alsa09", "--disable-alsa09",d)}"
+EXTRA_OECONF += " ${@base_contains("MACHINE_FEATURES", "pulseaudio", "--enable-pulse", "--disable-pulse",d)}"
+
 
 PACKAGES =+ "${PN}-alsa ${PN}-alsa-dev ${PN}-pulse ${PN}-pulse-dev ${PN}-oss ${PN}-oss-dev"
 
