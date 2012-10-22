@@ -14,13 +14,12 @@ INC_PR = "r3"
 SRC_URI = "git://github.com/PromyLOPh/pianobar;protocol=git"
 
 CFLAGS_append = " -std=c99"
-LDFLAGS_append = " -lgcrypt"
 
 do_compile () {
-    oe_runmake 'PREFIX=${D}${prefix}' 'DISABLE_MAD=1' 'DYNLINK=1'
+    oe_runmake 'PREFIX=${D}${prefix}' 'DISABLE_MAD=1'
 }
 
 do_install () {
-    oe_runmake 'PREFIX=${D}${prefix}' 'DISABLE_MAD=1' 'DYNLINK=1' install
+    oe_runmake 'PREFIX=${D}${prefix}' 'DISABLE_MAD=1' install
 }
 
